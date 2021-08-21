@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 15, 2021 at 09:13 PM
+-- Generation Time: Aug 21, 2021 at 11:40 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -33,6 +33,15 @@ CREATE TABLE `checkpoints` (
   `checkpoint` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `checkpoints`
+--
+
+INSERT INTO `checkpoints` (`playerid`, `level_id`, `checkpoint`) VALUES
+(4, 1, '0'),
+(5, 1, '0'),
+(6, 1, '0');
+
 -- --------------------------------------------------------
 
 --
@@ -49,7 +58,8 @@ CREATE TABLE `levels` (
 --
 
 INSERT INTO `levels` (`level_id`, `level_name`) VALUES
-(1, 'FIRST');
+(1, 'FIRST'),
+(2, 'SECOND');
 
 -- --------------------------------------------------------
 
@@ -61,7 +71,7 @@ CREATE TABLE `players` (
   `playerid` int(11) NOT NULL,
   `username` varchar(20) DEFAULT NULL,
   `password` int(11) DEFAULT NULL,
-  `email` varchar(20) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
   `level_id` int(11) DEFAULT NULL,
   `coins` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -71,7 +81,11 @@ CREATE TABLE `players` (
 --
 
 INSERT INTO `players` (`playerid`, `username`, `password`, `email`, `level_id`, `coins`) VALUES
-(2, 'testuser', 1998, 'mrxb114@gmail.com', 1, 0);
+(2, 'testuser', 1998, 'mrxb114@gmail.com', 1, 443),
+(3, 'test2', 2020, 'test2@emu.edu.tr', 1, 0),
+(4, 'regTest', 19982020, 'regTest@gmail.com', 1, 0),
+(5, 'kingpower114', 123456, 'kingpower114@gmail.c', 1, 0),
+(6, 'noop', 123456, 'noop@gmail.com', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -85,6 +99,15 @@ CREATE TABLE `statistics` (
   `numberoflogin` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `statistics`
+--
+
+INSERT INTO `statistics` (`playerid`, `numberofdeath`, `numberoflogin`) VALUES
+(4, 0, 0),
+(5, 0, 0),
+(6, 0, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -95,6 +118,15 @@ CREATE TABLE `weapons` (
   `playerid` int(11) DEFAULT NULL,
   `weapon_name` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `weapons`
+--
+
+INSERT INTO `weapons` (`playerid`, `weapon_name`) VALUES
+(4, 'sword'),
+(5, 'sword'),
+(6, 'sword');
 
 --
 -- Indexes for dumped tables
@@ -140,13 +172,13 @@ ALTER TABLE `weapons`
 -- AUTO_INCREMENT for table `levels`
 --
 ALTER TABLE `levels`
-  MODIFY `level_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `level_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `players`
 --
 ALTER TABLE `players`
-  MODIFY `playerid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `playerid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
