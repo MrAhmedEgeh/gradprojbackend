@@ -12,8 +12,10 @@ if(isset($_POST['playerid'])){
 
     if($result->num_rows > 0){
         while($row = $result->fetch_assoc()){
+            
             $weapons['playerid'] = $row['playerid'];
-            $weapons['weapon_name'] = $row['weapon_name'];
+            $weapons['weapon_name'] = $row['weapon_name']; 
+            //array_push($weapons, $row);
 
         }
 

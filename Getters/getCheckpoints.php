@@ -12,9 +12,11 @@ if(isset($_POST['playerid'])){
 
     if($result->num_rows > 0){
         while($row = $result->fetch_assoc()){
+            /*
             $checkpoint['playerid'] = $row['playerid'];
             $checkpoint['level_id'] = $row['level_id'];
-            $checkpoint['checkpoint'] = $row['checkpoint'];
+            $checkpoint['checkpoint'] = $row['checkpoint']; */
+            array_push($checkpoint, $row);
         }
 
         echo JSON_encode($checkpoint);
