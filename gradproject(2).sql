@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 21, 2021 at 11:40 PM
+-- Generation Time: Sep 22, 2021 at 12:38 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -38,9 +38,11 @@ CREATE TABLE `checkpoints` (
 --
 
 INSERT INTO `checkpoints` (`playerid`, `level_id`, `checkpoint`) VALUES
-(4, 1, '0'),
-(5, 1, '0'),
-(6, 1, '0');
+(4, 1, '0,0'),
+(5, 1, '0,0'),
+(6, 1, '0,0'),
+(4, 2, '0,0'),
+(5, 2, '0,0');
 
 -- --------------------------------------------------------
 
@@ -81,7 +83,7 @@ CREATE TABLE `players` (
 --
 
 INSERT INTO `players` (`playerid`, `username`, `password`, `email`, `level_id`, `coins`) VALUES
-(2, 'testuser', 1998, 'mrxb114@gmail.com', 1, 443),
+(2, 'testuser', 1998, 'mrxb114@gmail.com', 2, 0),
 (3, 'test2', 2020, 'test2@emu.edu.tr', 1, 0),
 (4, 'regTest', 19982020, 'regTest@gmail.com', 1, 0),
 (5, 'kingpower114', 123456, 'kingpower114@gmail.c', 1, 0),
