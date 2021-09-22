@@ -3,7 +3,7 @@ include '../dbConnect.php';
 
 
 $checkpoint = array();
-
+//$_POST['playerid'] = 4;
 if(isset($_POST['playerid'])){
     $id = $_POST['playerid'];
     
