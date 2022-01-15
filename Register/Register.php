@@ -53,19 +53,18 @@ function createNewRows($user, $pass, $email){ // it will create rows whereever w
         echo "Error: " . $player . "<br>" . $conn->error;
     }
 
-    // 2. WEAPON TABLE
+    // 2. SCORING TABLE
     if(isset($id)){
-        $weapon = "INSERT INTO weapons (playerid, weapon_name) VALUES ('$id', 'sword')";  
-        mysqli_query($conn, $weapon);
+        $scoring = "INSERT INTO scoring (player_id, level_id, score) VALUES ('$id', 1, 0)";  
+        $bools = mysqli_query($conn, $scoring);
+        if($bools){
+            $scoring2 = "INSERT INTO scoring (player_id, level_id, score) VALUES ('$id', 2, 0)";  
+            $mybool = mysqli_query($conn, $scoring2);
+            if($mybool){
+                $scoring3 = "INSERT INTO scoring (player_id, level_id, score) VALUES ('$id', 3, 0)";  
+                $mybool = mysqli_query($conn, $scoring3);
+            }
+        }
     }
-    // 3. STATISTICS TABLE
-    if(isset($id)){
-        $stat = "INSERT INTO statistics (playerid, numberofdeath, numberoflogin) VALUES ('$id', 0, 0)";  
-        mysqli_query($conn, $stat);
-    }
-    // 2. CHECKPOINT TABLE
-    if(isset($id)){
-        $checkpoint = "INSERT INTO checkpoints (playerid, level_id, checkpoint) VALUES ('$id', 1, 0)";  
-        mysqli_query($conn, $checkpoint);
-    }
+    
 }
