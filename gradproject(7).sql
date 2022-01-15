@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 22, 2021 at 12:38 AM
+-- Generation Time: Jan 15, 2022 at 02:06 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -24,29 +24,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `checkpoints`
---
-
-CREATE TABLE `checkpoints` (
-  `playerid` int(11) DEFAULT NULL,
-  `level_id` int(11) DEFAULT NULL,
-  `checkpoint` varchar(30) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `checkpoints`
---
-
-INSERT INTO `checkpoints` (`playerid`, `level_id`, `checkpoint`) VALUES
-(4, 1, '0,0'),
-(5, 1, '0,0'),
-(6, 1, '0,0'),
-(4, 2, '0,0'),
-(5, 2, '0,0');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `levels`
 --
 
@@ -60,8 +37,9 @@ CREATE TABLE `levels` (
 --
 
 INSERT INTO `levels` (`level_id`, `level_name`) VALUES
-(1, 'FIRST'),
-(2, 'SECOND');
+(1, 'Skull Forest'),
+(2, 'Dark Dungeon'),
+(3, 'Sky Eye');
 
 -- --------------------------------------------------------
 
@@ -85,61 +63,46 @@ CREATE TABLE `players` (
 INSERT INTO `players` (`playerid`, `username`, `password`, `email`, `level_id`, `coins`) VALUES
 (2, 'testuser', 1998, 'mrxb114@gmail.com', 2, 0),
 (3, 'test2', 2020, 'test2@emu.edu.tr', 1, 0),
-(4, 'regTest', 19982020, 'regTest@gmail.com', 1, 0),
+(4, 'regTest', 19982020, 'regTest@gmail.com', 2, 6),
 (5, 'kingpower114', 123456, 'kingpower114@gmail.c', 1, 0),
-(6, 'noop', 123456, 'noop@gmail.com', 1, 0);
+(6, 'noop', 123456, 'noop@gmail.com', 1, 0),
+(7, 'guy114', 1234567, 'guy114@gmail.com', 3, 0),
+(8, 'test2022', 1234567, 'test@gmail.com', 3, 0),
+(9, 'finaltester', 1234567, 'tester@gmail.com', 3, 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `statistics`
+-- Table structure for table `scoring`
 --
 
-CREATE TABLE `statistics` (
-  `playerid` int(11) DEFAULT NULL,
-  `numberofdeath` int(11) DEFAULT NULL,
-  `numberoflogin` int(11) DEFAULT NULL
+CREATE TABLE `scoring` (
+  `player_id` int(11) NOT NULL,
+  `level_id` int(11) NOT NULL,
+  `score` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `statistics`
+-- Dumping data for table `scoring`
 --
 
-INSERT INTO `statistics` (`playerid`, `numberofdeath`, `numberoflogin`) VALUES
-(4, 0, 0),
-(5, 0, 0),
-(6, 0, 0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `weapons`
---
-
-CREATE TABLE `weapons` (
-  `playerid` int(11) DEFAULT NULL,
-  `weapon_name` varchar(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `weapons`
---
-
-INSERT INTO `weapons` (`playerid`, `weapon_name`) VALUES
-(4, 'sword'),
-(5, 'sword'),
-(6, 'sword');
+INSERT INTO `scoring` (`player_id`, `level_id`, `score`) VALUES
+(2, 2, '3'),
+(2, 1, '1'),
+(2, 3, '0'),
+(7, 1, '0'),
+(7, 2, '0'),
+(7, 3, '0'),
+(8, 1, '0'),
+(8, 2, '0'),
+(8, 3, '0'),
+(9, 1, '0'),
+(9, 2, '0'),
+(9, 3, '0');
 
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `checkpoints`
---
-ALTER TABLE `checkpoints`
-  ADD KEY `playerid` (`playerid`),
-  ADD KEY `level_id` (`level_id`);
 
 --
 -- Indexes for table `levels`
@@ -155,16 +118,11 @@ ALTER TABLE `players`
   ADD KEY `level_id` (`level_id`);
 
 --
--- Indexes for table `statistics`
+-- Indexes for table `scoring`
 --
-ALTER TABLE `statistics`
-  ADD KEY `playerid` (`playerid`);
-
---
--- Indexes for table `weapons`
---
-ALTER TABLE `weapons`
-  ADD KEY `playerid` (`playerid`);
+ALTER TABLE `scoring`
+  ADD KEY `player_id` (`player_id`),
+  ADD KEY `level_id` (`level_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -174,24 +132,17 @@ ALTER TABLE `weapons`
 -- AUTO_INCREMENT for table `levels`
 --
 ALTER TABLE `levels`
-  MODIFY `level_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `level_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `players`
 --
 ALTER TABLE `players`
-  MODIFY `playerid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `playerid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `checkpoints`
---
-ALTER TABLE `checkpoints`
-  ADD CONSTRAINT `checkpoints_ibfk_1` FOREIGN KEY (`playerid`) REFERENCES `players` (`playerid`),
-  ADD CONSTRAINT `checkpoints_ibfk_2` FOREIGN KEY (`level_id`) REFERENCES `levels` (`level_id`);
 
 --
 -- Constraints for table `players`
@@ -200,16 +151,11 @@ ALTER TABLE `players`
   ADD CONSTRAINT `players_ibfk_1` FOREIGN KEY (`level_id`) REFERENCES `levels` (`level_id`);
 
 --
--- Constraints for table `statistics`
+-- Constraints for table `scoring`
 --
-ALTER TABLE `statistics`
-  ADD CONSTRAINT `statistics_ibfk_1` FOREIGN KEY (`playerid`) REFERENCES `players` (`playerid`);
-
---
--- Constraints for table `weapons`
---
-ALTER TABLE `weapons`
-  ADD CONSTRAINT `weapons_ibfk_1` FOREIGN KEY (`playerid`) REFERENCES `players` (`playerid`);
+ALTER TABLE `scoring`
+  ADD CONSTRAINT `scoring_ibfk_1` FOREIGN KEY (`player_id`) REFERENCES `players` (`playerid`),
+  ADD CONSTRAINT `scoring_ibfk_2` FOREIGN KEY (`level_id`) REFERENCES `levels` (`level_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
